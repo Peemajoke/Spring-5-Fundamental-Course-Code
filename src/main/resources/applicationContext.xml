@@ -11,7 +11,8 @@
     <bean name="speakerRepository" class="org.example.repository.HibernateSpeakerRepositoryImpl" />
 
     <bean name="speakerService" class="org.example.services.SpeakerServiceImpl">
-        <property name="speakerRepository" ref="speakerRepository" /> <!-- this will inject the speakerRepository bean (as we mention in ref) into this bean (speakerService bean) via calling the setSpeakerRepository setter (as we mention in name (spring add set in front of the value of name by itself)) -->
+        <constructor-arg index="0" ref="speakerRepository" />  <!-- index=0 mean the first argument of the constructor should be whatever define in ref (speakerRepository in this case). -->
+        <!-- this will inject the speakerRepository bean (as we mention in ref) into this bean (speakerService bean) via calling the constructor and provide speakerRepository bean as the first param -->
     </bean>
 
 </beans>
