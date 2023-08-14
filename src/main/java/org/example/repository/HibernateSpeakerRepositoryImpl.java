@@ -1,11 +1,15 @@
 package org.example.repository;
 
 import org.example.model.Speaker;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//* Having Impl in the class name to indicate that this class implement interface. The benefits is that We can swap the implementation class for testing purposes by make a stub, then extract interface of the stub making this class will remain the same.
+@Repository("speakerRepository") //* This HibernateSpeakerRepositoryImpl bean is now setup as a repository.
+@Scope(value = BeanDefinition.SCOPE_SINGLETON)
 public class HibernateSpeakerRepositoryImpl implements SpeakerRepository {
     @Override
     public List<Speaker> findAll(){
