@@ -10,9 +10,12 @@
     <!-- bean definitions here -->
     <bean name="speakerRepository" class="org.example.repository.HibernateSpeakerRepositoryImpl" />
 
-    <bean name="speakerService" class="org.example.services.SpeakerServiceImpl">
-        <constructor-arg index="0" ref="speakerRepository" />  <!-- index=0 mean the first argument of the constructor should be whatever define in ref (speakerRepository in this case). -->
-        <!-- this will inject the speakerRepository bean (as we mention in ref) into this bean (speakerService bean) via calling the constructor and provide speakerRepository bean as the first param -->
+<!--    <bean name="speakerService" class="org.example.services.SpeakerServiceImpl" autowire="constructor"> &lt;!&ndash; It uses constructor with an argument that set the field repository (line 15) to autowired. Because there is a bean with type speakerRepository and there is a constructor that receive an object with speakerRepository type as a parameter inside the class that this tag referenced to (SpeakerServiceImpl).  &ndash;&gt;-->
+<!--    <bean name="speakerService" class="org.example.services.SpeakerServiceImpl" autowire="byType"> &lt;!&ndash; It uses setter (line 24) to autowired. Because there is a bean with type speakerRepository and there is a setter method that receive an object with speakerRepository type as a parameter inside the class that this tag referenced to (SpeakerServiceImpl). &ndash;&gt;-->
+    <bean name="speakerService" class="org.example.services.SpeakerServiceImpl" autowire="byName"> <!-- It uses setter (line 24) to autowired. Because we have a bean name speakerRepository and inside speakerService that this tag refers to contain a setter name setSpeakerRepository that we have a bean of that name, it's call the setter method and passes the bean of the same name as setter's name (cut set part). Therefore, auto wiring -->
+
+<!--        <constructor-arg index="0" ref="speakerRepository" /> -->
+
     </bean>
 
 </beans>
