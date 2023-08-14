@@ -4,18 +4,17 @@ import org.example.repository.HibernateSpeakerRepositoryImpl;
 import org.example.repository.SpeakerRepository;
 import org.example.services.SpeakerService;
 import org.example.services.SpeakerServiceImpl;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
-//* This is use for config our app instead of ApplicationCOntext.xml. This class is POJO.
-@Configuration // Uses to tells Spring that this class is a config.
+@Configuration
 public class AppConfig {
-    @Bean(name = "speakerService") // This gives Bean a name. Usually uses camelCase. It will be an important factor in AutoWiring
+    @Bean(name = "speakerService")
+    @Scope(value = BeanDefinition.SCOPE_SINGLETON) // Define singleton scope to this Bean.
     public SpeakerService getSpeakerService(){
         SpeakerServiceImpl speakerService = new SpeakerServiceImpl(getSpeakerRepository());
-
-        // We use getSpeakerRepository() instead of new getSpeakerRepository() create it as a Bean and to get the full benefit of ez Singleton setup.
-//        speakerService.setRepository(getSpeakerRepository()); //* This solved pain point 2 as we change our repository to be injected through setter injection rather than hardcode new instance.
         return speakerService;
     }
 
