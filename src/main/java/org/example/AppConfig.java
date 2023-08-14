@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 @Configuration
 public class AppConfig {
     @Bean(name = "speakerService")
-    @Scope(value = BeanDefinition.SCOPE_SINGLETON) // Define singleton scope to this Bean.
+    @Scope(value = BeanDefinition.SCOPE_PROTOTYPE) // Define singleton scope to this Bean.
     public SpeakerService getSpeakerService(){
         SpeakerServiceImpl speakerService = new SpeakerServiceImpl(getSpeakerRepository());
         return speakerService;

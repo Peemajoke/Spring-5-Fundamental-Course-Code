@@ -19,7 +19,7 @@ public class Application {
         System.out.println(service);
 
         SpeakerService service2 = applicationContext.getBean("speakerService", SpeakerService.class);
-        //* We can see that getBean is returned the same bean as service.
+        //* We can see that getBean is returned the different bean.
         System.out.println(service2); // the @base16Number is the object address.
     }
 }
