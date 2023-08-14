@@ -11,6 +11,10 @@ public class SpeakerServiceImpl implements SpeakerService {
     // Pain point 2: Hard Code Referencing HibernateSpeakerRepositoryImpl.
     private SpeakerRepository repository;
 
+    public  SpeakerServiceImpl (SpeakerRepository speakerRepository){
+        repository = speakerRepository;
+    }
+
     //* Pain point 2 is now gone as SpeakerRepository is needed to be injected rather than hard code by new SpeakerRepository();
     public void setRepository(SpeakerRepository repository) {
         this.repository = repository;
