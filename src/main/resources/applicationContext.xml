@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is to config namespace to use for Spring config file. This will help us put up intellisense when we define bean -->
+<!-- Spring create this namespace that act like a dictionary of properties that we can use to create beans -->
+<!-- This file is created in the resources folder. Maven will compile this file and put in under the class folder. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean definitions here -->
+    <bean name="speakerRepository" class="org.example.repository.HibernateSpeakerRepositoryImpl" />
+
+    <bean name="speakerService" class="org.example.services.SpeakerServiceImpl">
+        <property name="speakerRepository" ref="speakerRepository" /> <!-- this will inject the speakerRepository bean (as we mention in ref) into this bean (speakerService bean) via calling the setSpeakerRepository setter (as we mention in name (spring add set in front of the value of name by itself)) -->
+    </bean>
+
+</beans>
