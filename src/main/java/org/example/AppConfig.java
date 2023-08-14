@@ -14,7 +14,10 @@ public class AppConfig {
     @Bean(name = "speakerService")
     @Scope(value = BeanDefinition.SCOPE_SINGLETON) // Define singleton scope to this Bean.
     public SpeakerService getSpeakerService(){
-        SpeakerServiceImpl speakerService = new SpeakerServiceImpl(getSpeakerRepository());
+//        SpeakerServiceImpl speakerService = new SpeakerServiceImpl(getSpeakerRepository());
+
+        //* We change to just call constructure with no args
+        SpeakerServiceImpl speakerService = new SpeakerServiceImpl();
         return speakerService;
     }
 
