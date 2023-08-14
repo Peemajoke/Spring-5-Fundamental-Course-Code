@@ -8,9 +8,10 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
-@Service("speakerService") //* This SpeakerServiceImpl bean is now setup as a service.
+@Service("speakerService")
 @Scope(value = BeanDefinition.SCOPE_SINGLETON)
 public class SpeakerServiceImpl implements SpeakerService {
     private SpeakerRepository repository;
@@ -19,16 +20,22 @@ public class SpeakerServiceImpl implements SpeakerService {
         System.out.println("SpeakerServiceImpl no args constructor.");
     }
 
-//    @Autowired //* We can do constructor injection by just @Autowired here instead of the setter method. It probably looks for a bean with speakerRepository name and pass that as this method's parameter.
+//    @Autowired
     public  SpeakerServiceImpl (SpeakerRepository speakerRepository){
         System.out.println("SpeakerServiceImpl repository constructor.");
         repository = speakerRepository;
     }
 
-    @Autowired //* This will inject the speakerRepository bean into this setter automatically. It probably looks for a bean with speakerRepository name and pass that as this method's parameter. I think in do inject stuff when the speakerService bean get construct.
+    @Autowired
     public void setRepository(SpeakerRepository repository) {
         System.out.println("SpeakerServiceImpl setter.");
         this.repository = repository;
+    }
+
+    @PostConstruct //* This annotated to run this method after any constructor of this class is run successfully.
+    //! Code in here should only be about config things after the bean is created. Don't open or close connection here.
+    private void initialize(){
+        System.out.println("Called after the constructor.");
     }
 
     @Override
