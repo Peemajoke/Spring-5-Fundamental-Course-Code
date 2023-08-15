@@ -4,6 +4,7 @@ public class Speaker {
 
     private String firstname;
     private String lastname;
+    private double seedNum; // A var that get seeded at runtime.
 
     public String getFirstname() {
         return firstname;
@@ -19,5 +20,13 @@ public class Speaker {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public double getSeededNum() {
+        return seedNum;
+    }
+
+    public void setSeedNum(double seededNum) {
+        this.seedNum = seededNum;
     }
 }

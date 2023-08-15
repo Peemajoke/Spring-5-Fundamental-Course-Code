@@ -2,6 +2,7 @@ package org.example.repository;
 
 import org.example.model.Speaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
@@ -15,10 +16,14 @@ import java.util.List;
 @Scope(value = BeanDefinition.SCOPE_SINGLETON)
 public class HibernateSpeakerRepositoryImpl implements SpeakerRepository {
 
-    @Autowired //* Wire Bean named cal. The bean is defined in AppConfig.java which is the calFactory() method.
+    @Autowired
     private Calendar cal;
     @Autowired
     private Calendar cal2;
+
+    @Value("#{ T(java.lang.Math).random() * 100 }")
+    private double seedNum; //* This seedNum will be injected during runtime by the @Value.
+
     @Override
     public List<Speaker> findAll(){
         List<Speaker> speakers = new ArrayList<>();
@@ -26,13 +31,12 @@ public class HibernateSpeakerRepositoryImpl implements SpeakerRepository {
         Speaker speaker = new Speaker();
         speaker.setFirstname("Mai");
         speaker.setLastname("Sakurajima");
+        speaker.setSeedNum(seedNum); //* When the method findAll is called, the seedNum will be set to speaker and we can get the value out for debugging values that set during runtime.
 
-        //* We can see that the printed date is modified. Therefore, the autowired wire the bean that have been instantiate from the factory bean.
         System.out.println("cal: " + cal.getTime());
 
-        //* These 2 have the same hashCode(), which means that cal and cal2 reference the same object. That is because the instance of Calandar is static.
-        System.out.println("cal: " + cal.hashCode());
-        System.out.println("cal2: " + cal2.hashCode());
+//        System.out.println("cal: " + cal.hashCode());
+//        System.out.println("cal2: " + cal2.hashCode());
 
         speakers.add(speaker);
 
