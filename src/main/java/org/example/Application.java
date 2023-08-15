@@ -20,5 +20,7 @@ public class Application {
 
         SpeakerService service2 = applicationContext.getBean("speakerService", SpeakerService.class);
         System.out.println(service2); // the @base16Number is the object address.
+
+        service.findAll();
     }
 }
