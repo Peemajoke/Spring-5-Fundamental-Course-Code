@@ -5,6 +5,7 @@ import org.example.services.SpeakerServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+//* To use @Profile. Go to edit configuration and set VM option to the following: -Dspring.profiles.active=dev
 public class Application {
     public static void main(String[] args) {
 
